@@ -1,0 +1,68 @@
+@import './mixins/mixins';
+@import './other/colors';
+@import './other/misc';
+
+body{
+  font-family: 'Arial', sans-serif;
+  color: $text-color;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 2px;
+}
+
+.app{
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+
+  .app-header{
+    position: relative;
+    border-bottom: 2px solid $border;
+
+    .container{
+      height: 96px;
+      -ms-flex-align: center;
+      align-items: center;
+
+      h1{
+        font-size: 30px;
+        font-weight: bold;
+        color: $black;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+      }
+    }
+  }// .app-header
+
+  .login{
+
+    form{
+      padding-top: 60px;
+
+      input{
+        width: 100%;
+        border-radius: 7px;
+        box-shadow: none;
+        border: 0;
+        display: block;
+        line-height: 79px;
+        font-size: 30px;
+        margin-bottom: 40px;
+
+        &[type="text"],
+        &[type="password"]{
+          background-color: $input;
+          padding:0 20px;
+        }
+
+        &[type="submit"]{
+          cursor: pointer;
+          background-color: $green;
+          color: $white;
+          font-weight: bold;
+        }
+      }
+    }
+  }// .login
+}// .app
