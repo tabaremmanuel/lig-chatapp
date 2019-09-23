@@ -154,7 +154,8 @@ body{
         padding-right: 20px;
       }
 
-      input{
+      textarea{
+        height:56px;
         background-color: $input;
         border: 0;
         box-shadow: none;

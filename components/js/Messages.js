@@ -1,7 +1,7 @@
 class Messages extends React.Component {
   render(){
 
-    return  this.props.messages.map( msg => {
+    return this.props.messages.map( msg => {
         let containerClass = 'message-container';
 
         if(msg.msg_from == this.props.curUser){

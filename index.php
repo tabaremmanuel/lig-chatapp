@@ -4,10 +4,11 @@
   <head>
     <meta charset="utf-8">
     <title>LIG Chat App</title>
-    <link rel="stylesheet" href="./css/master.min.css">
+    <link rel="stylesheet" href="./css/master.css">
     <script type="application/javascript" src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
     <script type="application/javascript" src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
     <script type="application/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script type="application/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
