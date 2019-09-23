@@ -2,7 +2,7 @@
 
   BACKEND: PHP + SQL
   
-  FRONTEND: ReactJS
+  FRONTEND: ReactJS + SASS
   
 
   SQL name: chatapp.sql 
