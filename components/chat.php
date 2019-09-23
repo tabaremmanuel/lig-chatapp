@@ -1,50 +1,26 @@
-<script type="text/babel" src="./components/js/Messages.js"></script>
+<script type="text/babel" src="./components/Messages.js"></script>
 <script type="text/babel">
 class Chat extends React.Component{
-
   state = {
-    messages: [
-      {
-        'created_at': '2019-05-20',
-        'msg_from': 'May',
-        'message': 'Hi Ken,<br/>I just sent the document to you on mail.<br/>Plz check it!'
-      },
-      {
-        'created_at': '2019-05-20',
-        'msg_from': 'Ken',
-        'message': 'Thank you May!<br/>It was great.'
-      },
-      {
-        'created_at': '2019-05-20',
-        'msg_from': 'Ken',
-        'message': 'I just checked it.<br/>Thanks!'
-      },
-      {
-        'created_at': '2019-05-20',
-        'msg_from': 'Mark',
-        'message': 'Hi guys, what’s up?'
-      },
-      {
-        'created_at': '2019-05-20',
-        'msg_from': 'April',
-        'message': 'Hi Mark, I stay Cebu now'
-      }
-    ],
+    messages: [],
     currentUser: '<?php echo $_SESSION['username']; ?>',
-    newMsg: ''
+    newMsg: '',
   }
 
   componentDidMount() {
-    this.getMessages
+    this.getNewMessages()
   }
 
-  getMessages => {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // if(prevState.messages.length !== this.state.messages.length)
+      this.getNewMessages()
+  }
+
+  getNewMessages(){
     const url = '/php/messages.php'
     axios.get(url).then(response => response.data)
     .then((data) => {
       this.setState({ messages: data })
-      // console.log(data);
-      console.log(this.state.messages)
      })
   }
 
@@ -52,52 +28,65 @@ class Chat extends React.Component{
     this.state.newMsg = event.target.value;
   }
 
+  updateNextLine = string => {
+    const spltStr = string.split('\n')
+    string = spltStr.join('<br/>')
+
+    return string;
+  }
+
   sendMessageHandler = () => {
-    event.preventDefault();
+    event.preventDefault()
 
-    let formData = new FormData();
-    formData.append('message', this.state.newMsg);
-    formData.append('msg_from', this.state.currentUser);
+    let formData = new FormData()
+    formData.append('message', this.updateNextLine(this.state.newMsg))
+    formData.append('msg_from', this.state.currentUser)
 
-    if(formData.message != '' && formData.message != ''){
+    this.setState({ newMsg: '' })
+    setTimeout(this.chatUI.scrollTop = this.chatUI.scrollHeight,1000)
+
+    if(this.state.newMsg){
       axios({
-          method: 'post',
-          url: '/php/messages.php',
-          data: formData,
-          config: { headers: {'Content-Type': 'multipart/form-data' }}
+        method: 'post',
+        url: '/php/messages.php',
+        data: formData,
+        config: { headers: {'Content-Type': 'multipart/form-data' }}
       })
       .then(function (response) {
-          //handle success
-          console.log(response);
-          axios.get(url).then(response => response.data)
-          .then((data) => {
-            this.setState({ messages: data })
-            // console.log(data);
-            console.log(this.state.messages)
-           })
+        //handle success
+        this.getNewMessages()
 
       })
       .catch(function (response) {
-          //handle error
-          console.log(response)
+        //handle error
+        // console.log(response)
       });
-    }
+    }else
+      console.log('New Message Empty!')
   }
+
+  chatUI = () => null
 
   render(){
     return(
-      <div>
+      <div
+        style = {{
+          height: window.innerHeight - 202 + 'px',
+          'overflow-y':'scroll'
+        }}
+        ref = { el => this.chatUI = el  }
+        className = "chat-ui">
         <div className="container">
             <Messages
               curUser={this.state.currentUser}
               messages={this.state.messages} />
         </div>
-        <div className="type-box">
+        <div className="type-box" >
           <div className="container">
             <textarea
               onChange={this.newMessageHandler.bind(event)}
               placeholder="Start a new message"
-              value={this.state.message} />
+              value={this.state.newMsg} />
             <button
               onClick={this.sendMessageHandler}
               className="btn">send</button>

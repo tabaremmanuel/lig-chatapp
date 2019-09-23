@@ -14,9 +14,7 @@
         )
       }else{
         appUI = (
-          <div className="chat-ui">
-            <Chat />
-          </div>
+          <Chat />
         )
         logout = <a className="btn" href="/php/logout.php">Log out</a>
       }
