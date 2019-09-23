@@ -1,0 +1,184 @@
+@import './mixins/mixins';
+@import './other/colors';
+@import './other/misc';
+
+body{
+  font-family: 'Arial', sans-serif;
+  color: $text-color;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 2px;
+}
+
+.app{
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+
+  .app-header{
+    position: relative;
+    border-bottom: 2px solid $border;
+
+    .container{
+      height: 96px;
+      -ms-flex-align: center;
+      align-items: center;
+
+      .btn{
+        line-height: 57px;
+        font-size: 24px;
+        color: $white;
+        background-color: $gray;
+        display: inline-block;
+        text-decoration: none;
+        position: absolute;
+        right: 16px;
+        border-radius: 10px;
+        max-width: 133px;
+        width: 100%;
+        text-align: center;
+      }
+
+      h1{
+        font-size: 30px;
+        font-weight: bold;
+        color: $black;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+      }
+    }
+  }// .app-header
+
+  .login{
+
+    form{
+      padding-top: 60px;
+
+      input{
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: none;
+        border: 0;
+        display: block;
+        line-height: 79px;
+        font-size: 30px;
+        margin-bottom: 40px;
+
+        &[type="text"],
+        &[type="password"]{
+          background-color: $input;
+          padding:0 20px;
+        }
+
+        &[type="submit"]{
+          cursor: pointer;
+          background-color: $green;
+          color: $white;
+          font-weight: bold;
+        }
+      }
+    }
+  }// .login
+
+  .chat-ui{
+    padding-top: 18px;
+    padding-bottom: 122px;
+
+    .container{
+      padding-right: 16px;
+    }
+
+    .message-list{
+      width:100%;
+    }
+
+    .message-container{
+      width: 100%;
+      text-align: left;
+      margin:22px 0;
+
+      &.own-message{
+        text-align: right;
+
+        & .message-text::before{
+          left: auto;
+          right: -10px;
+
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+
+          border-left: 10px solid $green;
+          border-right: 0;
+        }
+      }
+
+      .message-text{
+        text-align: left;
+        display: inline-block;
+        background-color: $green;
+        color: $white;
+        padding: 11.5px 20px;
+        border-radius: 10px;
+        position: relative;
+
+        &::before{
+          content: "";
+          position: absolute;
+          left: -10px;
+          bottom: 24px;
+
+          width: 0;
+          height: 0;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+
+          border-right:10px solid $green;
+        }
+      }
+    }
+
+    .type-box{
+      position: fixed;
+      bottom:0;
+      left:0;
+      width:100%;
+      background-color: $white;
+
+      .container{
+        justify-content: space-between;
+        border-top: 2px solid $border;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      input{
+        background-color: $input;
+        border: 0;
+        box-shadow: none;
+        font-size: 24px;
+        line-height: 57px;
+        width: calc(100% - 121px);
+        letter-spacing: 2px;
+        border-radius: 10px;
+        padding: 0 18px;
+      }
+
+      button{
+        width: 97px;
+        text-align: center;
+        background-color: $gray;
+        line-height: 57px;
+        position: relative;
+        font-size: 24px;
+        color: $white;
+        letter-spacing: 2px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+    }
+  }// .chat-ui
+}// .app
