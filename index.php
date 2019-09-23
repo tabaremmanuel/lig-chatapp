@@ -1,4 +1,4 @@
-<?php require_once "./components/process.php"; ?>
+<?php require_once "./php/process.php"; ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -10,13 +10,10 @@
     <script type="application/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
   </head>
   <body>
-
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <?php require_once './components/form.php'; ?>
-    <?php require_once './components/chat.php'; ?>
-    <script type="text/babel" src="./js/app.js"></script>
+    <?php require_once('./containers/app.php'); ?>
     <script type="text/babel">
       const rootElement = document.getElementById('root')
       const loggedIn = <?php echo $logged_in; ?>
